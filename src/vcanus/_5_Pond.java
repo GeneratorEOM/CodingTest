@@ -24,6 +24,8 @@ public class _5_Pond {
 
 	public static void main(String[] args) {	
 		
+		long start = System.currentTimeMillis();
+		
 		int[][] pond = {
 				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 				{0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
@@ -39,15 +41,33 @@ public class _5_Pond {
 
 		// 셀이 1~3이고 상하좌우가 1~3보다 같거나 크다면 셀 +1
 		// 깊이가 최대 4 인것을 알기 때문에 이렇게 반복문을 작성했지만 모를 경우는 어떻게 할지 생각이 필요하다.
-		for(int k=1;k<4;k++) {
+//		for(int k=1;k<4;k++) {
+//			// pond[i][j]
+//			for(int i=0;i<pond.length;i++) {
+//				for(int j=0;j<pond.length;j++) {
+//					// getCount(pond, i, j, 조건수) == 4 면 상하좌우 같거나 크다. 현재 셀 +1
+//					if(getCount(pond, i, j, k) == 4) pond[i][j]++;
+//				}
+//			}
+//		}
+		int k= 1;
+		boolean CheckDept = false;
+		while(true) {			
 			// pond[i][j]
 			for(int i=0;i<pond.length;i++) {
-				for(int j=0;j<pond.length;j++) {
+				for(int j=0;j<pond.length;j++) {						
 					// getCount(pond, i, j, 조건수) == 4 면 상하좌우 같거나 크다. 현재 셀 +1
-					if(getCount(pond, i, j, k) == 4) pond[i][j]++;
+					if(getCount(pond, i, j, k) == 4) {
+						pond[i][j]++;
+						if(!CheckDept) CheckDept = true;
+					}
 				}
 			}
+			if(!CheckDept) break;
+			CheckDept = false;
+			k++;
 		}
+		
 		// 배열 출력
 		for(int i=0;i<pond.length;i++) {
 			for(int j=0;j<pond.length;j++) {
@@ -55,7 +75,9 @@ public class _5_Pond {
 			}
 			System.out.println();
 		}
-
+		
+		long end = System.currentTimeMillis();
+		System.out.println("실행시간: "+(end-start)/1000.0);
 	}
 
 }
